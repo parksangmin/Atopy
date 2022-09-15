@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide.init
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -20,14 +21,19 @@ import com.sangmin.atopy.data.Model
 
 class CategoryListActivity : AppCompatActivity() {
 
-
-    lateinit var myRef2 : DatabaseReference
-
+   var myRef2 : String
+   init {
+       myRef2 = this.toString()
+   }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.category1_list)
+
+
+
+
 
         val items = ArrayList<Model>()
         val rvAdapter = CategoryRVAdapter(baseContext, items)
@@ -36,23 +42,52 @@ class CategoryListActivity : AppCompatActivity() {
         val database = Firebase.database
 
 
+        val myRef = database.getReference("atopy")
+
+
+
+
+
+//        Firebase Realtime Database 데이터 읽기
+        val postListener1 = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                for (dataModel in dataSnapshot.children) {
+                    Log.d("Category1ListActivity", dataModel.toString())
+                    val item = dataModel.getValue(Model::class.java)
+                    items.add(item!!)
+                }
+                rvAdapter.notifyDataSetChanged()
+                Log.d("Category1ListActivity", items.toString())
+
+
+            }
+
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("Category1ListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        myRef.addValueEventListener(postListener1)
+
 
 
 
         if (category == "category2") {
 
-            myRef2 = database.getReference("atopy2").child("test1")
+           val myRef2 = database.getReference("atopy2").child("test1")
 
 
         } else if (category == "category3") {
 
 
-            myRef2 = database.getReference("atopy2").child("test2")
+           val myRef2 = database.getReference("atopy2").child("test2")
 
 
         } else if(category == "category4")
 
-            myRef2 = database.getReference("atopy2").child("test3")
+           val myRef2 = database.getReference("atopy2").child("test3")
 
 
 
@@ -79,8 +114,6 @@ class CategoryListActivity : AppCompatActivity() {
             }
         }
         myRef2.addValueEventListener(postListener2)
-
-
 
 
 
@@ -133,33 +166,8 @@ class CategoryListActivity : AppCompatActivity() {
 
 
 
-////
 //
-//val myRef = database.getReference("atopy")
-//
-//
-////        Firebase Realtime Database 데이터 읽기
-//val postListener1 = object : ValueEventListener {
-//    override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//        for (dataModel in dataSnapshot.children) {
-//            Log.d("Category1ListActivity", dataModel.toString())
-//            val item = dataModel.getValue(Model::class.java)
-//            items.add(item!!)
-//        }
-//        rvAdapter.notifyDataSetChanged()
-//        Log.d("Category1ListActivity", items.toString())
-//
-//
-//    }
-//
-//
-//    override fun onCancelled(databaseError: DatabaseError) {
-//        // Getting Post failed, log a message
-//        Log.w("Category1ListActivity", "loadPost:onCancelled", databaseError.toException())
-//    }
-//}
-//myRef.addValueEventListener(postListener1)
+
 
 
 
