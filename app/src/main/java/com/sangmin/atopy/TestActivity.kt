@@ -17,18 +17,18 @@ class TestActivity : AppCompatActivity() {
 
         binding.category2Layout.setOnClickListener {
             val intent = Intent(this, CategoryListActivity::class.java)
-            intent.putExtra("category","category2")
+            intent.putExtra("category","test1")
             startActivity(intent)
         }
 
         binding.category3Layout.setOnClickListener {
             val intent = Intent(this, CategoryListActivity::class.java)
-            intent.putExtra("category","category3")
+            intent.putExtra("category","test2")
             startActivity(intent)
         }
         binding.category4Layout.setOnClickListener {
             val intent = Intent(this, CategoryListActivity::class.java)
-            intent.putExtra("category","category4")
+            intent.putExtra("category","test3")
             startActivity(intent)
         }
     }
