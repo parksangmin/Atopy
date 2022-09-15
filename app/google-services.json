@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "998708522754",
+    "project_id": "atopy-d0d0e",
+    "storage_bucket": "atopy-d0d0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998708522754:android:75101b26f0cf4597061c1b",
+        "android_client_info": {
+          "package_name": "com.sangmin.atopy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998708522754-q97vmk2um2fdv3pq637m4f7ifdr7mg3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUVauiPpnPd4eQIiuAExrb_k2L919hjgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998708522754-q97vmk2um2fdv3pq637m4f7ifdr7mg3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
