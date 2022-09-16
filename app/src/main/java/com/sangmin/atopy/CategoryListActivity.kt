@@ -21,7 +21,7 @@ import com.sangmin.atopy.data.Model
 class CategoryListActivity : AppCompatActivity() {
 
 
-    lateinit var myRef2 : DatabaseReference
+    lateinit var myRef : DatabaseReference
 
 
 
@@ -31,34 +31,28 @@ class CategoryListActivity : AppCompatActivity() {
 
         val items = ArrayList<Model>()
         val rvAdapter = CategoryRVAdapter(baseContext, items)
-        val category = intent.getStringExtra("category")
 
         val database = Firebase.database
 
 
+        val category = intent.getStringExtra("category")
+
+
+        if (category == "category1") {
+
+             myRef = database.getReference("atopy")
+
+
+        }else if(category == "category2") {
+
+             myRef = database.getReference("atopy2")
 
 
 
-        if (category == "category2") {
-
-            myRef2 = database.getReference("atopy2").child("test1")
-
-
-        } else if (category == "category3") {
-
-
-            myRef2 = database.getReference("atopy2").child("test2")
-
-
-        } else if(category == "category4")
-
-            myRef2 = database.getReference("atopy2").child("test3")
-
-
-
+        }
 
         //        Firebase Realtime Database 데이터 읽기
-        val postListener2 = object : ValueEventListener {
+        val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 for (dataModel in dataSnapshot.children) {
@@ -72,13 +66,16 @@ class CategoryListActivity : AppCompatActivity() {
 
             }
 
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
                 Log.w("Category1ListActivity", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        myRef2.addValueEventListener(postListener2)
+        myRef.addValueEventListener(postListener)
+
+
+
+
 
 
 
@@ -91,18 +88,13 @@ class CategoryListActivity : AppCompatActivity() {
 
 
 //        val myRef2 = database.getReference("atopy2")
-//        myRef2.child("test1").push().setValue(
-//            Model("title4","https://w7.pngwing.com/pngs/738/161/png-transparent-circle-area-symbol-number-font-1-text-black-number.png","https://blog.naver.com/dhwkffks7/222875602164")
-//
-//        )
-//        myRef2.child("test2").push().setValue(
-//            Model("title5","https://w7.pngwing.com/pngs/738/161/png-transparent-circle-area-symbol-number-font-1-text-black-number.png","https://blog.naver.com/dhwkffks7/222875600065")
-//
-//        )
-//        myRef2.child("test3").push().setValue(
-//            Model("title6","https://w7.pngwing.com/pngs/738/161/png-transparent-circle-area-symbol-number-font-1-text-black-number.png","https://blog.naver.com/dhwkffks7/222875602164")
-//
-//        )
+//        myRef2.push()
+//            .setValue(Model("기도폐쇄", "https://www.gyeongnam.go.kr/01_potal/images/welfare/pic2f.gif", "https://blog.naver.com/dhwkffks7/222869936745"))
+//        myRef2.push()
+//            .setValue(Model("중독", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/GHS-pictogram-skull.svg/250px-GHS-pictogram-skull.svg.png","https://blog.naver.com/dhwkffks7/222869940230"))
+//        myRef2.push()
+//            .setValue(Model("심장마비", "https://www.gyeongnam.go.kr/01_potal/images/welfare/picd3.gif","https://blog.naver.com/dhwkffks7/222873265243"))
+
 
 
         val rv: RecyclerView = findViewById(R.id.rv)
@@ -133,33 +125,9 @@ class CategoryListActivity : AppCompatActivity() {
 
 
 
-////
 //
-//val myRef = database.getReference("atopy")
-//
-//
-////        Firebase Realtime Database 데이터 읽기
-//val postListener1 = object : ValueEventListener {
-//    override fun onDataChange(dataSnapshot: DataSnapshot) {
-//
-//        for (dataModel in dataSnapshot.children) {
-//            Log.d("Category1ListActivity", dataModel.toString())
-//            val item = dataModel.getValue(Model::class.java)
-//            items.add(item!!)
-//        }
-//        rvAdapter.notifyDataSetChanged()
-//        Log.d("Category1ListActivity", items.toString())
-//
-//
-//    }
-//
-//
-//    override fun onCancelled(databaseError: DatabaseError) {
-//        // Getting Post failed, log a message
-//        Log.w("Category1ListActivity", "loadPost:onCancelled", databaseError.toException())
-//    }
-//}
-//myRef.addValueEventListener(postListener1)
+
+
 
 
 

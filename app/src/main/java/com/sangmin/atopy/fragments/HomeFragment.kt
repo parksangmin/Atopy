@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.sangmin.atopy.CategoryListActivity
 import com.sangmin.atopy.R
-import com.sangmin.atopy.TestActivity
 import com.sangmin.atopy.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,13 +32,14 @@ class HomeFragment : Fragment() {
 
         binding.category1Layout.setOnClickListener {
             val intent = Intent(context, CategoryListActivity::class.java)
-            intent.putExtra("category","category1")
+            intent.putExtra("category", "category1")
             startActivity(intent)
         }
 
 
         binding.category2Layout.setOnClickListener {
-            val intent = Intent(context, TestActivity::class.java)
+            val intent = Intent(context, CategoryListActivity::class.java)
+            intent.putExtra("category", "category2")
             startActivity(intent)
         }
 
