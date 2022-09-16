@@ -1,6 +1,7 @@
 package com.sangmin.atopy.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.sangmin.atopy.CategoryShowActivity
 import com.sangmin.atopy.R
 import com.sangmin.atopy.data.Model
 
@@ -34,7 +36,6 @@ class CategoryRVAdapter(val context: Context,val items : ArrayList<Model>) : Rec
             }
         }
         holder.bindItems(items[position])
-
     }
 
 
@@ -51,11 +52,11 @@ class CategoryRVAdapter(val context: Context,val items : ArrayList<Model>) : Rec
             val Maintitle = itemView.findViewById<TextView>(R.id.textArea)
             val imageView  = itemView.findViewById<ImageView>(R.id.ImgView)
 
-
             Maintitle.text = item.title
             Glide.with(context)
                 .load(item.imageUrl)
                 .into(imageView)
+
 
 
         }
